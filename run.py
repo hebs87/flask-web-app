@@ -2,7 +2,8 @@
 import os
 
 # 1. Import the Flask class from the flask library - Capital 'F' indicates class name
-from flask import Flask
+# 7. Import render_template function to render HTML
+from flask import Flask, render_template
 
 # 2. Create an instance of Flask class - convention in Python is to call the variable app
 # First argument of Flask class is name of the application's module or package
@@ -11,13 +12,29 @@ from flask import Flask
 app = Flask(__name__)
 
 # 3. Using the app.route() decorator - starts with an @ sign, a.k.a py notation
-# Decorator is a way of wrapping functions - when we try to browse to the root directory,
+# Decorator is a way of wrapping functions - when we try to browse to the homepage,
 # as indicated by "/", flask triggers the functions underneath it
 @app.route("/")
 
-# 4. Create function
+# 4. Create index() function where we want to run our data from
+# 8. Reference render_template and HTML page (created in templates directory)
 def index():
-    return "Hello, World!"
+    # We can type HTML directly into our return. eg return "<h1>Hello, World!</h1>"
+    # which is time consuming, so we use render_template instead
+    return render_template("index.html")
+
+# 9. Create another route to about.html page
+@app.route("/about")
+
+# 10. Create about() function that is called each time we navigate to about.html
+# ***The href links in the HTML pages need to have the same function name in them***
+def about():
+    return render_template("about.html")
+
+# 11. Create another route to the contact.html page, and a contact() function
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 # 6. Reference the built in variable and say if __name__ is equal to "__main__"
 # we will run our app with the following arguments
