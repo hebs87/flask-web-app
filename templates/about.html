@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello Flask</title>
-</head>
-<body>
-    
-    <nav>
-        <ul>
-            <!--href using Jinja templating language
-            The curly braces indicate to Flaask that there is code within it
-            the url_for() function looks up the relevant view-->
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-            <li><a href="{{ url_for('contact') }}">Contact</a></li>
-        </ul>
-    </nav>
-    
+<!--We import our base.html template using the extends keyword-->
+{% extends 'base.html' %}
+<!--We call our block and inject the below code into it
+Flask inherits everything from base.html, then looks for block called content in
+the template, and injects the code into it-->
+{% block content %}
+        
     <h1>About Page</h1>
     
-</body>
-</html>
+{% endblock %}

@@ -36,6 +36,11 @@ def about():
 def contact():
     return render_template("contact.html")
 
+# 12. Create another route to the careers.html page, and a careers() function
+@app.route("/careers")
+def careers():
+    return render_template("careers.html")
+
 # 6. Reference the built in variable and say if __name__ is equal to "__main__"
 # we will run our app with the following arguments
 # __main__ is the name of the default module in Python, the first one that we run
