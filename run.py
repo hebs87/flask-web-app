@@ -1,6 +1,9 @@
 # 5. Import os from the standard Python library
 import os
 
+# 13. Import JSON library, which will allow us to parse the incoming data from JSON file
+import json
+
 # 1. Import the Flask class from the flask library - Capital 'F' indicates class name
 # 7. Import render_template function to render HTML
 from flask import Flask, render_template
@@ -31,7 +34,15 @@ def index():
 # 13. Add page_title argument - variable that can be called anything and can have as many as needed
 # String within it is what is displayed in the HTML file where we insert the expression
 def about():
-    return render_template("about.html", page_title="About")
+    # 14. We import the json file data here
+    # Create empty list
+    # Open json file as json_data
+    # Set the data variable to the json data that we've parsed through
+    # Then pass that into the return variable 'company' (can be anything)
+    data = []
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", company=data)
 
 # 11. Create another route to the contact.html page, and a contact() function
 @app.route("/contact")
