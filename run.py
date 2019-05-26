@@ -28,18 +28,20 @@ def index():
 
 # 10. Create about() function that is called each time we navigate to about.html
 # ***The href links in the HTML pages need to have the same function name in them***
+# 13. Add page_title argument - variable that can be called anything and can have as many as needed
+# String within it is what is displayed in the HTML file where we insert the expression
 def about():
-    return render_template("about.html")
+    return render_template("about.html", page_title="About")
 
 # 11. Create another route to the contact.html page, and a contact() function
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact")
 
 # 12. Create another route to the careers.html page, and a careers() function
 @app.route("/careers")
 def careers():
-    return render_template("careers.html")
+    return render_template("careers.html", page_title="Careers")
 
 # 6. Reference the built in variable and say if __name__ is equal to "__main__"
 # we will run our app with the following arguments
