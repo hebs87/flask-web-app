@@ -6,7 +6,9 @@ import json
 
 # 1. Import the Flask class from the flask library - Capital 'F' indicates class name
 # 7. Import render_template function to render HTML
-from flask import Flask, render_template
+# 18. Import the request function to handle things like finding out which form method used,
+# and it will also contain our form object when we've posted it
+from flask import Flask, render_template, request
 
 # 2. Create an instance of Flask class - convention in Python is to call the variable app
 # First argument of Flask class is name of the application's module or package
@@ -65,8 +67,12 @@ def about_member(member_name):
         return render_template("member.html", member=member)
 
 # 11. Create another route to the contact.html page, and a contact() function
-@app.route("/contact")
+# 17. Link to form - specify in route that our server accepts GET and POST form submit methods
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    # 19. We include an if statement to show the form's data in the debugger window if the method is POST
+    if request.method == "POST":
+        print(request.form)
     return render_template("contact.html", page_title="Contact")
 
 # 12. Create another route to the careers.html page, and a careers() function
