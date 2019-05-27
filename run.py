@@ -8,13 +8,17 @@ import json
 # 7. Import render_template function to render HTML
 # 18. Import the request function to handle things like finding out which form method used,
 # and it will also contain our form object when we've posted it
-from flask import Flask, render_template, request
+# 20. Import flash to allow us to provide flashed message to user on form submission
+from flask import Flask, render_template, request, flash
 
 # 2. Create an instance of Flask class - convention in Python is to call the variable app
 # First argument of Flask class is name of the application's module or package
 # If using a single module, we use (__name__) which is built in Python variable
 # Flask needs this so it knows where to look for templates and static files
 app = Flask(__name__)
+
+# 21. Create secret key to use flashed message on form submission
+app.secret_key = 'some_secret'
 
 # 3. Using the app.route() decorator - starts with an @ sign, a.k.a py notation
 # Decorator is a way of wrapping functions - when we try to browse to the homepage,
@@ -72,7 +76,10 @@ def about_member(member_name):
 def contact():
     # 19. We include an if statement to show the form's data in the debugger window if the method is POST
     if request.method == "POST":
-        print(request.form)
+        # print(request.form) if we want to print the form's input to the debugger
+        # 22. Flashed message formatted here - once done, update the HTML file so it can receive the messages
+        flash("Thanks {}, we have received your message".format(request.form["name"]))
+    
     return render_template("contact.html", page_title="Contact")
 
 # 12. Create another route to the careers.html page, and a careers() function

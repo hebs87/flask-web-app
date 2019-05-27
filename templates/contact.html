@@ -11,7 +11,26 @@ the template, and injects the code into it-->
 <!--Copy and paste template form code from contact.html on theme's github page and amend for our requirements-->
 <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
+        <!--FLASHED MESSAGES - Update our HTML file to receive the flashed message from the .py file
+        To do that, create a with block with the variable called messages, which will store the results of the
+        get_flashed_messages() function, that will return any of the messages that we've created using the
+        flash() function in py file
+        Then we say, if we have successfully returned messages from our get_flashed_messages function,
+        we will return some HTML (give the ul a class so we can style it using custom CSS styles-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <!--Inside our ul, we will iterate through the flashed messages, if we have more than one-->
+        <ul class="flashes">
+            {% for message in messages %}
+            <!--This will pass in each individual message to the li-->
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        
         <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+        
         <!--Add POST method to the form element - allows us to post info to our backend server-->
         <form method="POST" name="sentMessage" id="contactForm" novalidate>
             <div class="control-group">
