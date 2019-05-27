@@ -1,7 +1,7 @@
 # 5. Import os from the standard Python library
 import os
 
-# 13. Import JSON library, which will allow us to parse the incoming data from JSON file
+# 14. Import JSON library, which will allow us to parse the incoming data from JSON file
 import json
 
 # 1. Import the Flask class from the flask library - Capital 'F' indicates class name
@@ -34,7 +34,7 @@ def index():
 # 13. Add page_title argument - variable that can be called anything and can have as many as needed
 # String within it is what is displayed in the HTML file where we insert the expression
 def about():
-    # 14. We import the json file data here
+    # 15. We import the json file data here
     # Create empty list
     # Open json file as json_data
     # Set the data variable to the json data that we've parsed through
@@ -43,6 +43,26 @@ def about():
     with open("data/company.json", "r") as json_data:
         data = json.load(json_data)
     return render_template("about.html", page_title="About", company=data)
+
+# 16. Advanced routing - iterate through the url keys in json file and link to the titles in about.html
+# Clicking the link will take the user to another page (member.html) which contains more
+# info about the character (<member_name> is the variable we will pass in as function argument)
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    # Create empty object to store data in
+    member = {}
+    # Open the data as in step 15
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        # Iterate through the data object that we've created and say:
+        # If the url in that particular element of our array is equal to the member_name (variable we've passed in),
+        # then the member object should be equal to the current object
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+        
+        # If they match, we will return our member object (the variable object that we created first in the function)
+        return render_template("member.html", member=member)
 
 # 11. Create another route to the contact.html page, and a contact() function
 @app.route("/contact")

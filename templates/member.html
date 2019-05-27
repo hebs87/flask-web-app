@@ -1,0 +1,23 @@
+<!--This is the template file that the user is taken to with more info about the
+character that they clicked on from the about page (ADVANCED ROUTING)-->
+
+<!--We import our base.html template using the extends keyword-->
+{% extends 'base.html' %}
+<!--We call our block and inject the below code into it
+Flask inherits everything from base.html, then looks for block called content in
+the template, and injects the code into it-->
+{% block content %}
+
+<div class="row">
+    <div class="col-md-5">
+        <img class="featurette-image img-responsive" src="{{ member.image_source }}" alt="Profile image for {{ member.name }}">
+    </div>
+    <div class="col-md-7">
+        <h3>{{ member.name }}</h3>
+        <p>
+            {{ member.description }}
+        </p>
+    </div>
+</div>
+    
+{% endblock %}

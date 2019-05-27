@@ -19,30 +19,32 @@ the template, and injects the code into it-->
     
     <div class="row featurette">
         
+        <!-- loop.index shows us which iteration of the for loop we are on -->
         <!-- if statement - if the loop.index is odd, display the below code -->
         {% if loop.index % 2 != 0 %}
         
         <div class="col-md-7">
             <!-- member is our variable in the for loop, .name is the name key in the json object-->
-            <!-- loop.index shows us which iteration of the for loop we are on -->
-            <h3>{{ member.name }}</h3>
+            <!--Advanced routing - We are creating a member.url from json file to route to more info when title clicked-->
+            <h3><a href="/about/{{ member.url }}">{{ member.name }}</a></h3>
             <p>
                 <!-- member is our variable in the for loop, .description is the description key in the json object-->
                 {{ member.description }}
             </p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-responsive" src="{{ member.image_source }}" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive" src="{{ member.image_source }}" alt="Profile image for {{ member.name }}">
         </div>
         
         <!-- else statement, so the below code will display if the loop.index is even-->
         {% else %}
         
         <div class="col-md-5">
-            <img class="featurette-image img-responsive" src="{{ member.image_source }}" alt="Generic placeholder image">
+            <img class="featurette-image img-responsive" src="{{ member.image_source }}" alt="Profile image for {{ member.name }}">
         </div>
         <div class="col-md-7">
-            <h3>{{ member.name }}</h3>
+            <!--Advanced routing - We are creating a member.url from json file to route to more info when title clicked-->
+            <h3><a href="/about/{{ member.url }}">{{ member.name }}</a></h3>
             <p>
                 {{ member.description }}
             </p>
